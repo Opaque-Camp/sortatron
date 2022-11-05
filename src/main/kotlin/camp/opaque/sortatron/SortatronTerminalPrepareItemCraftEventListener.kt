@@ -1,6 +1,5 @@
 package camp.opaque.sortatron
 
-import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.PrepareItemCraftEvent
@@ -11,7 +10,7 @@ class SortatronTerminalPrepareItemCraftEventListener(
     @EventHandler
     fun onPrepareItemCraft(event: PrepareItemCraftEvent) {
         val result = event.inventory.result ?: return
-        if (result.type == Material.ENDER_CHEST) {
+        if (result.type == MaterialAliases.SORTATRON_TERMINAL) {
             sortatronTerminalItemStackGenerator.modifyStack(result)
         }
     }

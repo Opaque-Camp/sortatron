@@ -29,7 +29,7 @@ class SortatronTerminalPrepareItemCraftEventListenerTest : StringSpec({
     }
 
     """onPrepareItemCraft() should modify Ender Chest result to be Sortatron Terminal""" {
-        every { result.type } returns Material.ENDER_CHEST
+        every { result.type } returns MaterialAliases.SORTATRON_TERMINAL
         justRun { terminalGenerator.modifyStack(result) }
 
         listener.onPrepareItemCraft(event)

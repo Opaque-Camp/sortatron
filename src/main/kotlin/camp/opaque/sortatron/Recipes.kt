@@ -6,7 +6,7 @@ import org.bukkit.Server
 class Recipes {
     fun register(server: Server) {
         server.addRecipe(
-            shapedRecipe("sortatron_terminal", Material.ENDER_CHEST) {
+            shapedRecipe("sortatron_terminal", MaterialAliases.SORTATRON_TERMINAL) {
                 shape(
                     "scs",
                     "crc",
