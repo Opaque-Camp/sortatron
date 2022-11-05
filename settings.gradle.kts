@@ -1,3 +1,1 @@
-
-rootProject.name = "SortingSystem"
-
+rootProject.name = "Sortatron"
