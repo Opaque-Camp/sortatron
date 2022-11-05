@@ -15,8 +15,4 @@ class SortatronPlugin : JavaPlugin() {
         )
         logger.info("Sortatron plugin startup complete.")
     }
-
-    companion object {
-        const val NAMESPACE = "sortatron"
-    }
 }
