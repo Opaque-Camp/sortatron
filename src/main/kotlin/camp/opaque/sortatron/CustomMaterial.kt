@@ -12,5 +12,21 @@ enum class CustomMaterial(val humanName: String, val originalMaterial: Material)
     SORTATRON_CONFIGURATOR("Sortatron Configurator", ENDER_CHEST),
     SORTATRON_ACCESSOR("Sortatron Accessor", ENDER_CHEST);
 
+    /**
+     * Key for crafting recipe of this item.
+     */
     val recipeKey get() = namespacedKey(name.lowercase())
+
+    /**
+     * [org.bukkit.NamespacedKey] for telling the custom items apart from vanilla items of the same material,
+     * for example, a Sortatron Accessor from a regular Ender Chest.
+     * This key is used in custom [org.bukkit.persistence.PersistentDataContainer]'s
+     * [PersistentDataContainer][org.bukkit.persistence.PersistentDataContainer].
+     * Custom items have this key in their data container, while vanilla items of the same material do not.
+     */
+    val identityKey get() = namespacedKey("is_${name.lowercase()}")
+
+    companion object {
+        val enderChestBackedMaterials get() = values().filter { it.originalMaterial == ENDER_CHEST }
+    }
 }
