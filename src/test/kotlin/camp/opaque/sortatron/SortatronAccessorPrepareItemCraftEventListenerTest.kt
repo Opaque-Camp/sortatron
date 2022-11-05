@@ -14,7 +14,7 @@ class SortatronAccessorPrepareItemCraftEventListenerTest : StringSpec({
     lateinit var result: ItemStack
     lateinit var recipe: ShapedRecipe
     lateinit var craftingInventory: CraftingInventory
-    lateinit var accessorGenerator: SortatronAccessorItemStackGenerator
+    lateinit var accessorGenerator: CustomItemStackMarker
     lateinit var event: PrepareItemCraftEvent
     lateinit var listener: SortatronAccessorPrepareItemCraftEventListener
 
@@ -33,11 +33,11 @@ class SortatronAccessorPrepareItemCraftEventListenerTest : StringSpec({
 
     """onPrepareItemCraft() should modify Ender Chest result to be Sortatron Accessor""" {
         every { recipe.key } returns CustomMaterial.SORTATRON_ACCESSOR.recipeKey
-        justRun { accessorGenerator.modifyStack(result) }
+        justRun { accessorGenerator.markItemStack(result) }
 
         listener.onPrepareItemCraft(event)
 
-        verify { accessorGenerator.modifyStack(result) }
+        verify { accessorGenerator.markItemStack(result) }
     }
 
     """onPrepareItemCraft() should not touch other results""" {

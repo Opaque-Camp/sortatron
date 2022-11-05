@@ -4,8 +4,9 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class SortatronPlugin : JavaPlugin() {
     private val logger = SortatronLogger(getLogger())
-    private val sortatronConfiguratorItemStackGenerator = SortatronConfiguratorItemStackGeneratorImpl()
-    private val sortatronAccessorItemStackGenerator = SortatronAccessorItemStackGeneratorImpl()
+    private val sortatronConfiguratorItemStackGenerator =
+        CustomItemStackMarkerImpl(CustomMaterial.SORTATRON_CONFIGURATOR)
+    private val sortatronAccessorItemStackGenerator = CustomItemStackMarkerImpl(CustomMaterial.SORTATRON_ACCESSOR)
 
     override fun onEnable() {
         logger.info("Sortatron plugin starting up...")

@@ -14,7 +14,7 @@ class SortatronConfiguratorPrepareItemCraftEventListenerTest : StringSpec({
     lateinit var result: ItemStack
     lateinit var recipe: ShapedRecipe
     lateinit var craftingInventory: CraftingInventory
-    lateinit var configuratorGenerator: SortatronConfiguratorItemStackGenerator
+    lateinit var configuratorGenerator: CustomItemStackMarker
     lateinit var event: PrepareItemCraftEvent
     lateinit var listener: SortatronConfiguratorPrepareItemCraftEventListener
 
@@ -33,11 +33,11 @@ class SortatronConfiguratorPrepareItemCraftEventListenerTest : StringSpec({
 
     """onPrepareItemCraft() should modify Ender Chest result to be Sortatron Configurator""" {
         every { recipe.key } returns CustomMaterial.SORTATRON_CONFIGURATOR.recipeKey
-        justRun { configuratorGenerator.modifyStack(result) }
+        justRun { configuratorGenerator.markItemStack(result) }
 
         listener.onPrepareItemCraft(event)
 
-        verify { configuratorGenerator.modifyStack(result) }
+        verify { configuratorGenerator.markItemStack(result) }
     }
 
     """onPrepareItemCraft() should not touch other results""" {

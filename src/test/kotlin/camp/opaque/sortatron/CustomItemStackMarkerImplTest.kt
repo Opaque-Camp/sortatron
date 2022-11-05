@@ -13,33 +13,35 @@ import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 
-class SortatronAccessorItemStackGeneratorImplTest : StringSpec({
-    "modifyStack() turns an Ender Chest into a Sortatron Accessor" {
+class CustomItemStackMarkerImplTest : StringSpec({
+    "markItemStack() turns an Ender Chest into a Sortatron Accessor" {
         val itemStack = mockk<ItemStack>()
         val fakeItemMeta = mockk<ItemMeta>()
         val fakePersistentDataContainer = mockk<PersistentDataContainer>()
-        every { itemStack.type } returns CustomMaterial.SORTATRON_ACCESSOR.material
+        every { itemStack.type } returns CustomMaterial.SORTATRON_CONFIGURATOR.material
         every { itemStack.itemMeta } returns fakeItemMeta
         every { itemStack.setItemMeta(any()) } returns true
         every { fakeItemMeta.persistentDataContainer } returns fakePersistentDataContainer
         justRun {
-            fakePersistentDataContainer[namespacedKey("is_sortatron_accessor"), PersistentDataType.BYTE] = 1
+            fakePersistentDataContainer[namespacedKey("is_sortatron_configurator"), PersistentDataType.BYTE] = 1
         }
-        justRun { fakeItemMeta.displayName(Component.text("Sortatron Accessor")) }
+        justRun { fakeItemMeta.displayName(Component.text("Sortatron Configurator")) }
 
-        SortatronAccessorItemStackGeneratorImpl().modifyStack(itemStack)
+        CustomItemStackMarkerImpl(CustomMaterial.SORTATRON_CONFIGURATOR).markItemStack(itemStack)
 
         verify {
-            fakePersistentDataContainer[namespacedKey("is_sortatron_accessor"), PersistentDataType.BYTE] = 1
+            fakePersistentDataContainer[namespacedKey("is_sortatron_configurator"), PersistentDataType.BYTE] = 1
         }
-        verify { fakeItemMeta.displayName(Component.text("Sortatron Accessor")) }
+        verify { fakeItemMeta.displayName(Component.text("Sortatron Configurator")) }
         verify { itemStack.itemMeta = fakeItemMeta }
     }
 
-    "modifyStack() throws an exception if the item stack type is not correct" {
+    "markItemStack() throws an exception if the item stack type is not correct" {
         val itemStack = mockk<ItemStack>()
         every { itemStack.type } returns Material.DIRT
 
-        shouldThrow<IllegalArgumentException> { SortatronAccessorItemStackGeneratorImpl().modifyStack(itemStack) }
+        shouldThrow<IllegalArgumentException> {
+            CustomItemStackMarkerImpl(CustomMaterial.SORTATRON_CONFIGURATOR).markItemStack(itemStack)
+        }
     }
 })

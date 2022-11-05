@@ -10,13 +10,13 @@ import org.bukkit.inventory.ShapedRecipe
  * the Sortatron Accessor using [SortatronAccessorItemStackGenerator].
  */
 class SortatronAccessorPrepareItemCraftEventListener(
-    private val sortatronAccessorItemStackGenerator: SortatronAccessorItemStackGenerator
+    private val sortatronAccessorItemStackGenerator: CustomItemStackMarker
 ) : Listener {
     @EventHandler
     fun onPrepareItemCraft(event: PrepareItemCraftEvent) {
         val recipeKey = (event.recipe as? ShapedRecipe)?.key ?: return
         if (recipeKey.key == CustomMaterial.SORTATRON_ACCESSOR.name.lowercase()) {
-            sortatronAccessorItemStackGenerator.modifyStack(event.inventory.result ?: return)
+            sortatronAccessorItemStackGenerator.markItemStack(event.inventory.result ?: return)
         }
     }
 }
