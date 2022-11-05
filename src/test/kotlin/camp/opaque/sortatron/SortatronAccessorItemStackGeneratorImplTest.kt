@@ -13,26 +13,26 @@ import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 
-class SortatronConfiguratorItemStackGeneratorImplTest : StringSpec({
-    "modifyStack() turns a Command Block into a Sortatron Configurator" {
+class SortatronAccessorItemStackGeneratorImplTest : StringSpec({
+    "modifyStack() turns an Ender Chest into a Sortatron Accessor" {
         val itemStack = mockk<ItemStack>()
         val fakeItemMeta = mockk<ItemMeta>()
         val fakePersistentDataContainer = mockk<PersistentDataContainer>()
-        every { itemStack.type } returns MaterialAliases.SORTATRON_CONFIGURATOR
+        every { itemStack.type } returns MaterialAliases.SORTATRON_ACCESSOR
         every { itemStack.itemMeta } returns fakeItemMeta
         every { itemStack.setItemMeta(any()) } returns true
         every { fakeItemMeta.persistentDataContainer } returns fakePersistentDataContainer
         justRun {
-            fakePersistentDataContainer[namespacedKey("is_sortatron_configurator"), PersistentDataType.BYTE] = 1
+            fakePersistentDataContainer[namespacedKey("is_sortatron_accessor"), PersistentDataType.BYTE] = 1
         }
-        justRun { fakeItemMeta.displayName(Component.text("Sortatron Configurator")) }
+        justRun { fakeItemMeta.displayName(Component.text("Sortatron Accessor")) }
 
-        SortatronConfiguratorItemStackGeneratorImpl().modifyStack(itemStack)
+        SortatronAccessorItemStackGeneratorImpl().modifyStack(itemStack)
 
         verify {
-            fakePersistentDataContainer[namespacedKey("is_sortatron_configurator"), PersistentDataType.BYTE] = 1
+            fakePersistentDataContainer[namespacedKey("is_sortatron_accessor"), PersistentDataType.BYTE] = 1
         }
-        verify { fakeItemMeta.displayName(Component.text("Sortatron Configurator")) }
+        verify { fakeItemMeta.displayName(Component.text("Sortatron Accessor")) }
         verify { itemStack.itemMeta = fakeItemMeta }
     }
 
@@ -40,6 +40,6 @@ class SortatronConfiguratorItemStackGeneratorImplTest : StringSpec({
         val itemStack = mockk<ItemStack>()
         every { itemStack.type } returns Material.DIRT
 
-        shouldThrow<IllegalArgumentException> { SortatronConfiguratorItemStackGeneratorImpl().modifyStack(itemStack) }
+        shouldThrow<IllegalArgumentException> { SortatronAccessorItemStackGeneratorImpl().modifyStack(itemStack) }
     }
 })

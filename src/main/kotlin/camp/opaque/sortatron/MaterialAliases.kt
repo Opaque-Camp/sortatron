@@ -9,4 +9,5 @@ import org.bukkit.Material
  */
 object MaterialAliases {
     val SORTATRON_CONFIGURATOR = Material.COMMAND_BLOCK
+    val SORTATRON_ACCESSOR = Material.ENDER_CHEST
 }
