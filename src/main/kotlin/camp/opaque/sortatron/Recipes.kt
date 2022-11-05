@@ -8,20 +8,30 @@ import org.bukkit.inventory.ShapedRecipe
 /** Stores all custom Sortatron recipes. */
 class Recipes {
     fun register(server: Server) {
-        server.addRecipe(
-            shapedRecipe(CustomItem.SORTATRON_CONFIGURATOR) {
-                shape(
-                    "scs",
-                    "crc",
-                    "scs"
-                )
-                setIngredient('s', Material.COBBLESTONE)
-                setIngredient('c', Material.ENDER_CHEST)
-                setIngredient('r', Material.REDSTONE_BLOCK)
-            }
-        )
+        recipes.forEach(server::addRecipe)
     }
 }
+
+private val recipes = setOf(
+    shapedRecipe(CustomItem.SORTATRON_CONFIGURATOR) {
+        shape(
+            "scs",
+            "crc",
+            "scs"
+        )
+        setIngredient('s', Material.COBBLESTONE)
+        setIngredient('c', Material.ENDER_CHEST)
+        setIngredient('r', Material.REDSTONE_BLOCK)
+    },
+    shapedRecipe(CustomItem.SORTATRON_ACCESSOR) {
+        shape(
+            " c ",
+            "ccc",
+            " c "
+        )
+        setIngredient('c', Material.ENDER_CHEST)
+    }
+)
 
 private fun shapedRecipe(
     result: CustomItem,
