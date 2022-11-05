@@ -2,6 +2,7 @@ package camp.opaque.sortatron
 
 import org.bukkit.plugin.java.JavaPlugin
 
+@Suppress("unused")
 class SortatronPlugin : JavaPlugin() {
     private val logger = SortatronLogger(getLogger())
     private val customItemStackMarker = CustomItemStackMarkerImpl()
