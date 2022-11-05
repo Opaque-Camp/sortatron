@@ -10,12 +10,12 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.inventory.CraftingInventory
 import org.bukkit.inventory.ItemStack
 
-class SortatronTerminalPrepareItemCraftEventListenerTest : StringSpec({
+class SortatronConfiguratorPrepareItemCraftEventListenerTest : StringSpec({
     lateinit var result: ItemStack
     lateinit var craftingInventory: CraftingInventory
-    lateinit var terminalGenerator: SortatronTerminalItemStackGenerator
+    lateinit var terminalGenerator: SortatronConfiguratorItemStackGenerator
     lateinit var event: PrepareItemCraftEvent
-    lateinit var listener: SortatronTerminalPrepareItemCraftEventListener
+    lateinit var listener: SortatronConfiguratorPrepareItemCraftEventListener
 
     beforeAny {
         result = mockk()
@@ -25,11 +25,11 @@ class SortatronTerminalPrepareItemCraftEventListenerTest : StringSpec({
         event = mockk()
         every { event.inventory } returns craftingInventory
 
-        listener = SortatronTerminalPrepareItemCraftEventListener(terminalGenerator)
+        listener = SortatronConfiguratorPrepareItemCraftEventListener(terminalGenerator)
     }
 
-    """onPrepareItemCraft() should modify Ender Chest result to be Sortatron Terminal""" {
-        every { result.type } returns MaterialAliases.SORTATRON_TERMINAL
+    """onPrepareItemCraft() should modify Ender Chest result to be Sortatron Configurator""" {
+        every { result.type } returns MaterialAliases.SORTATRON_CONFIGURATOR
         justRun { terminalGenerator.modifyStack(result) }
 
         listener.onPrepareItemCraft(event)

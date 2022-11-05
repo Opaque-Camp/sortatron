@@ -13,26 +13,26 @@ import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 
-class SortatronTerminalItemStackGeneratorImplTest : StringSpec({
-    "generate() creates a new Sortatron Terminal item" {
+class SortatronConfiguratorItemStackGeneratorImplTest : StringSpec({
+    "generate() creates a new Sortatron Configurator item" {
         val itemStack = mockk<ItemStack>()
         val fakeItemMeta = mockk<ItemMeta>()
         val fakePersistentDataContainer = mockk<PersistentDataContainer>()
-        every { itemStack.type } returns MaterialAliases.SORTATRON_TERMINAL
+        every { itemStack.type } returns MaterialAliases.SORTATRON_CONFIGURATOR
         every { itemStack.itemMeta } returns fakeItemMeta
         every { itemStack.setItemMeta(any()) } returns true
         every { fakeItemMeta.persistentDataContainer } returns fakePersistentDataContainer
         justRun {
-            fakePersistentDataContainer[namespacedKey("is_sortatron_terminal"), PersistentDataType.BYTE] = 1
+            fakePersistentDataContainer[namespacedKey("is_sortatron_configurator"), PersistentDataType.BYTE] = 1
         }
-        justRun { fakeItemMeta.displayName(Component.text("Sortatron Terminal")) }
+        justRun { fakeItemMeta.displayName(Component.text("Sortatron Configurator")) }
 
-        SortatronTerminalItemStackGeneratorImpl().modifyStack(itemStack)
+        SortatronConfiguratorItemStackGeneratorImpl().modifyStack(itemStack)
 
         verify {
-            fakePersistentDataContainer[namespacedKey("is_sortatron_terminal"), PersistentDataType.BYTE] = 1
+            fakePersistentDataContainer[namespacedKey("is_sortatron_configurator"), PersistentDataType.BYTE] = 1
         }
-        verify { fakeItemMeta.displayName(Component.text("Sortatron Terminal")) }
+        verify { fakeItemMeta.displayName(Component.text("Sortatron Configurator")) }
         verify { itemStack.itemMeta = fakeItemMeta }
     }
 
@@ -40,6 +40,6 @@ class SortatronTerminalItemStackGeneratorImplTest : StringSpec({
         val itemStack = mockk<ItemStack>()
         every { itemStack.type } returns Material.DIRT
 
-        shouldThrow<IllegalArgumentException> { SortatronTerminalItemStackGeneratorImpl().modifyStack(itemStack) }
+        shouldThrow<IllegalArgumentException> { SortatronConfiguratorItemStackGeneratorImpl().modifyStack(itemStack) }
     }
 })
