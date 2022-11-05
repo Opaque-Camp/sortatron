@@ -4,6 +4,10 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.PrepareItemCraftEvent
 
+/**
+ * Listens for the crafting of a Sortatron Terminal and modifies the result ItemStack to have properties of
+ * the Sortatron Terminal using [SortatronTerminalItemStackGenerator].
+ */
 class SortatronTerminalPrepareItemCraftEventListener(
     private val sortatronTerminalItemStackGenerator: SortatronTerminalItemStackGenerator
 ) : Listener {

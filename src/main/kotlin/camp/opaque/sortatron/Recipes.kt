@@ -5,6 +5,7 @@ import org.bukkit.Server
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.ShapedRecipe
 
+/** Stores all custom Sortatron recipes. */
 class Recipes {
     fun register(server: Server) {
         server.addRecipe(
