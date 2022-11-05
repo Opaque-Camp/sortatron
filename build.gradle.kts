@@ -30,3 +30,14 @@ tasks.test {
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+tasks.register<Jar>("uberJar") {
+    archiveClassifier.set("with-deps")
+
+    from(sourceSets.main.get().output)
+
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map(::zipTree)
+    }).duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
