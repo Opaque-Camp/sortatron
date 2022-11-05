@@ -18,6 +18,6 @@ class SortatronPlugin : JavaPlugin() {
     private fun registerListeners() {
         server.pluginManager.registerEvents(PrepareCustomItemCraftEventListener(customItemStackMarker), this)
         server.pluginManager.registerEvents(ConfiguratorInventoryOpenEventListener(), this)
-        server.pluginManager.registerEvents(CustomEnderChestPlaceListener(customItemMarkerKeyCopier), this)
+        server.pluginManager.registerEvents(CustomBlockPlaceListener(customItemMarkerKeyCopier), this)
     }
 }
