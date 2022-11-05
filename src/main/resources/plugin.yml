@@ -1,0 +1,7 @@
+name: Sortatron
+version: 0.1.0
+main: camp.opaque.sortatron.SortatronPlugin
+description: PaperMC plugin featuring an automated item sorting system. Like a database, but for your items.
+author: javabird25
+website: https://github.com/Opaque-Camp/sortatron
+api-version: 1.19
