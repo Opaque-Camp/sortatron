@@ -5,40 +5,43 @@ import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
-import org.bukkit.Material
 import org.bukkit.event.inventory.PrepareItemCraftEvent
 import org.bukkit.inventory.CraftingInventory
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.ShapedRecipe
 
 class SortatronConfiguratorPrepareItemCraftEventListenerTest : StringSpec({
     lateinit var result: ItemStack
+    lateinit var recipe: ShapedRecipe
     lateinit var craftingInventory: CraftingInventory
-    lateinit var terminalGenerator: SortatronConfiguratorItemStackGenerator
+    lateinit var configuratorGenerator: SortatronConfiguratorItemStackGenerator
     lateinit var event: PrepareItemCraftEvent
     lateinit var listener: SortatronConfiguratorPrepareItemCraftEventListener
 
     beforeAny {
-        result = mockk()
+        recipe = mockk()
         craftingInventory = mockk()
+        result = mockk()
         every { craftingInventory.result } returns result
-        terminalGenerator = mockk()
         event = mockk()
+        every { event.recipe } returns recipe
         every { event.inventory } returns craftingInventory
+        configuratorGenerator = mockk()
 
-        listener = SortatronConfiguratorPrepareItemCraftEventListener(terminalGenerator)
+        listener = SortatronConfiguratorPrepareItemCraftEventListener(configuratorGenerator)
     }
 
     """onPrepareItemCraft() should modify Ender Chest result to be Sortatron Configurator""" {
-        every { result.type } returns CustomMaterial.SORTATRON_CONFIGURATOR.material
-        justRun { terminalGenerator.modifyStack(result) }
+        every { recipe.key } returns CustomMaterial.SORTATRON_CONFIGURATOR.recipeKey
+        justRun { configuratorGenerator.modifyStack(result) }
 
         listener.onPrepareItemCraft(event)
 
-        verify { terminalGenerator.modifyStack(result) }
+        verify { configuratorGenerator.modifyStack(result) }
     }
 
     """onPrepareItemCraft() should not touch other results""" {
-        every { result.type } returns Material.DIRT
+        every { recipe.key } returns namespacedKey("something_else")
 
         listener.onPrepareItemCraft(event)
     }

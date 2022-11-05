@@ -11,5 +11,7 @@ import org.bukkit.Material.ENDER_CHEST
  */
 enum class CustomMaterial(val material: Material) {
     SORTATRON_CONFIGURATOR(COMMAND_BLOCK),
-    SORTATRON_ACCESSOR(ENDER_CHEST),
+    SORTATRON_ACCESSOR(ENDER_CHEST);
+
+    val recipeKey get() = namespacedKey(name.lowercase())
 }
