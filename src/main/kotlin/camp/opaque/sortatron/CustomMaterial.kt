@@ -1,7 +1,6 @@
 package camp.opaque.sortatron
 
 import org.bukkit.Material
-import org.bukkit.Material.COMMAND_BLOCK
 import org.bukkit.Material.ENDER_CHEST
 
 /**
@@ -10,7 +9,7 @@ import org.bukkit.Material.ENDER_CHEST
  * them in order to distinguish them from other items, for example, a Sortatron Configurator from a Command Block.
  */
 enum class CustomMaterial(val humanName: String, val originalMaterial: Material) {
-    SORTATRON_CONFIGURATOR("Sortatron Configurator", COMMAND_BLOCK),
+    SORTATRON_CONFIGURATOR("Sortatron Configurator", ENDER_CHEST),
     SORTATRON_ACCESSOR("Sortatron Accessor", ENDER_CHEST);
 
     val recipeKey get() = namespacedKey(name.lowercase())
