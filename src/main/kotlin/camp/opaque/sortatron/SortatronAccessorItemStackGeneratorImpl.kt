@@ -6,8 +6,8 @@ import org.bukkit.persistence.PersistentDataType
 
 class SortatronAccessorItemStackGeneratorImpl : SortatronAccessorItemStackGenerator {
     override fun modifyStack(stack: ItemStack) {
-        if (stack.type != MaterialAliases.SORTATRON_ACCESSOR) {
-            throw IllegalArgumentException("ItemStack must be of type ${MaterialAliases.SORTATRON_ACCESSOR}")
+        if (stack.type != CustomMaterial.SORTATRON_ACCESSOR.material) {
+            throw IllegalArgumentException("ItemStack must be of type ${CustomMaterial.SORTATRON_ACCESSOR}")
         }
         stack.itemMeta = stack.itemMeta.apply {
             displayName(Component.text("Sortatron Accessor"))

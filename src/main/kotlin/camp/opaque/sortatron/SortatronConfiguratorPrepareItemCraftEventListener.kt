@@ -14,7 +14,8 @@ class SortatronConfiguratorPrepareItemCraftEventListener(
     @EventHandler
     fun onPrepareItemCraft(event: PrepareItemCraftEvent) {
         val result = event.inventory.result ?: return
-        if (result.type == MaterialAliases.SORTATRON_CONFIGURATOR) {
+        // We can omit checking for the recipe layout because the Command Block is not craftable in vanilla.
+        if (result.type == CustomMaterial.SORTATRON_CONFIGURATOR.material) {
             sortatronConfiguratorItemStackGenerator.modifyStack(result)
         }
     }

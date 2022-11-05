@@ -6,8 +6,8 @@ import org.bukkit.persistence.PersistentDataType
 
 class SortatronConfiguratorItemStackGeneratorImpl : SortatronConfiguratorItemStackGenerator {
     override fun modifyStack(stack: ItemStack) {
-        if (stack.type != MaterialAliases.SORTATRON_CONFIGURATOR) {
-            throw IllegalArgumentException("ItemStack type must be ${MaterialAliases.SORTATRON_CONFIGURATOR}")
+        if (stack.type != CustomMaterial.SORTATRON_CONFIGURATOR.material) {
+            throw IllegalArgumentException("ItemStack type must be ${CustomMaterial.SORTATRON_CONFIGURATOR}")
         }
         stack.itemMeta = stack.itemMeta.apply {
             persistentDataContainer[namespacedKey("is_sortatron_configurator"), PersistentDataType.BYTE] = 1

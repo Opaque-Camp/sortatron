@@ -29,7 +29,7 @@ class SortatronConfiguratorPrepareItemCraftEventListenerTest : StringSpec({
     }
 
     """onPrepareItemCraft() should modify Ender Chest result to be Sortatron Configurator""" {
-        every { result.type } returns MaterialAliases.SORTATRON_CONFIGURATOR
+        every { result.type } returns CustomMaterial.SORTATRON_CONFIGURATOR.material
         justRun { terminalGenerator.modifyStack(result) }
 
         listener.onPrepareItemCraft(event)

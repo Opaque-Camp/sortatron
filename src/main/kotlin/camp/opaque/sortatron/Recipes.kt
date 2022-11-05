@@ -9,7 +9,7 @@ import org.bukkit.inventory.ShapedRecipe
 class Recipes {
     fun register(server: Server) {
         server.addRecipe(
-            shapedRecipe(MaterialAliases.SORTATRON_CONFIGURATOR) {
+            shapedRecipe(CustomMaterial.SORTATRON_CONFIGURATOR) {
                 shape(
                     "scs",
                     "crc",
@@ -24,6 +24,6 @@ class Recipes {
 }
 
 private fun shapedRecipe(
-    resultMaterial: Material,
+    resultMaterial: CustomMaterial,
     init: ShapedRecipe.() -> Unit
-) = ShapedRecipe(namespacedKey(resultMaterial.name.lowercase()), ItemStack(resultMaterial)).apply { init() }
+) = ShapedRecipe(namespacedKey(resultMaterial.name.lowercase()), ItemStack(resultMaterial.material)).apply { init() }

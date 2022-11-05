@@ -18,7 +18,7 @@ class SortatronConfiguratorItemStackGeneratorImplTest : StringSpec({
         val itemStack = mockk<ItemStack>()
         val fakeItemMeta = mockk<ItemMeta>()
         val fakePersistentDataContainer = mockk<PersistentDataContainer>()
-        every { itemStack.type } returns MaterialAliases.SORTATRON_CONFIGURATOR
+        every { itemStack.type } returns CustomMaterial.SORTATRON_CONFIGURATOR.material
         every { itemStack.itemMeta } returns fakeItemMeta
         every { itemStack.setItemMeta(any()) } returns true
         every { fakeItemMeta.persistentDataContainer } returns fakePersistentDataContainer
