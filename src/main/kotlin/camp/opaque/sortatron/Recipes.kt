@@ -3,10 +3,10 @@ package camp.opaque.sortatron
 import org.bukkit.Material
 import org.bukkit.Server
 
-class Recipes(private val sortatronTerminalItemStackGenerator: SortatronTerminalItemStackGenerator) {
+class Recipes {
     fun register(server: Server) {
         server.addRecipe(
-            shapedRecipe("sortatron_terminal", sortatronTerminalItemStackGenerator.generate()) {
+            shapedRecipe("sortatron_terminal", Material.ENDER_CHEST) {
                 shape(
                     "scs",
                     "crc",

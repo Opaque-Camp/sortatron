@@ -4,12 +4,15 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class SortatronPlugin : JavaPlugin() {
     private val logger = SortatronLogger(getLogger())
-    private val itemStackFactory = ItemStackFactoryImpl()
-    private val sortatronTerminalItemStackGenerator = SortatronTerminalItemStackGeneratorImpl(itemStackFactory)
+    private val sortatronTerminalItemStackGenerator = SortatronTerminalItemStackGeneratorImpl()
 
     override fun onEnable() {
         logger.info("Sortatron plugin starting up...")
-        Recipes(sortatronTerminalItemStackGenerator).register(server)
+        Recipes().register(server)
+        server.pluginManager.registerEvents(
+            SortatronTerminalPrepareItemCraftEventListener(sortatronTerminalItemStackGenerator),
+            this
+        )
         logger.info("Sortatron plugin startup complete.")
     }
 
