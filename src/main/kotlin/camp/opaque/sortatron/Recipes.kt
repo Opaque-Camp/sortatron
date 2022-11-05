@@ -2,6 +2,8 @@ package camp.opaque.sortatron
 
 import org.bukkit.Material
 import org.bukkit.Server
+import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.ShapedRecipe
 
 class Recipes {
     fun register(server: Server) {
@@ -19,3 +21,9 @@ class Recipes {
         )
     }
 }
+
+private fun shapedRecipe(
+    key: String,
+    resultMaterial: Material,
+    init: ShapedRecipe.() -> Unit
+) = ShapedRecipe(namespacedKey(key), ItemStack(resultMaterial)).apply { init() }
