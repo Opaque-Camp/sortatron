@@ -6,7 +6,7 @@ import org.bukkit.persistence.PersistentDataType
 
 class CustomItemStackMarkerImpl : CustomItemStackMarker {
     override fun markItemStack(material: CustomMaterial, stack: ItemStack) {
-        if (stack.type != material.material) {
+        if (stack.type != material.originalMaterial) {
             throw IllegalArgumentException("ItemStack must be of type $material")
         }
         stack.itemMeta = stack.itemMeta.apply {

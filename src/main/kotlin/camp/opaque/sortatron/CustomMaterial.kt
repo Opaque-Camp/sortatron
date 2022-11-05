@@ -9,7 +9,7 @@ import org.bukkit.Material.ENDER_CHEST
  * Since there is no way to register custom materials, we have to use existing ones and add persistent data values to
  * them in order to distinguish them from other items, for example, a Sortatron Configurator from a Command Block.
  */
-enum class CustomMaterial(val humanName: String, val material: Material) {
+enum class CustomMaterial(val humanName: String, val originalMaterial: Material) {
     SORTATRON_CONFIGURATOR("Sortatron Configurator", COMMAND_BLOCK),
     SORTATRON_ACCESSOR("Sortatron Accessor", ENDER_CHEST);
 

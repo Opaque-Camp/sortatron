@@ -26,4 +26,7 @@ class Recipes {
 private fun shapedRecipe(
     resultMaterial: CustomMaterial,
     init: ShapedRecipe.() -> Unit
-) = ShapedRecipe(namespacedKey(resultMaterial.name.lowercase()), ItemStack(resultMaterial.material)).apply { init() }
+) = ShapedRecipe(
+    namespacedKey(resultMaterial.name.lowercase()),
+    ItemStack(resultMaterial.originalMaterial)
+).apply { init() }
