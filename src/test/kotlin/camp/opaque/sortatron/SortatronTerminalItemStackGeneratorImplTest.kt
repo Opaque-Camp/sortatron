@@ -1,11 +1,13 @@
 package camp.opaque.sortatron
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import net.kyori.adventure.text.Component
+import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
@@ -16,6 +18,7 @@ class SortatronTerminalItemStackGeneratorImplTest : StringSpec({
         val itemStack = mockk<ItemStack>()
         val fakeItemMeta = mockk<ItemMeta>()
         val fakePersistentDataContainer = mockk<PersistentDataContainer>()
+        every { itemStack.type } returns MaterialAliases.SORTATRON_TERMINAL
         every { itemStack.itemMeta } returns fakeItemMeta
         every { itemStack.setItemMeta(any()) } returns true
         every { fakeItemMeta.persistentDataContainer } returns fakePersistentDataContainer
@@ -31,5 +34,12 @@ class SortatronTerminalItemStackGeneratorImplTest : StringSpec({
         }
         verify { fakeItemMeta.displayName(Component.text("Sortatron Terminal")) }
         verify { itemStack.itemMeta = fakeItemMeta }
+    }
+
+    "generate() throws an exception if the item stack type is not correct" {
+        val itemStack = mockk<ItemStack>()
+        every { itemStack.type } returns Material.DIRT
+
+        shouldThrow<IllegalArgumentException> { SortatronTerminalItemStackGeneratorImpl().modifyStack(itemStack) }
     }
 })
