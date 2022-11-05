@@ -9,7 +9,7 @@ class SortatronPlugin : JavaPlugin() {
 
     override fun onEnable() {
         logger.info("Sortatron plugin starting up...")
-        Recipes(sortatronTerminalItemStackGenerator).register()
+        Recipes(sortatronTerminalItemStackGenerator).register(server)
         logger.info("Sortatron plugin startup complete.")
     }
 
