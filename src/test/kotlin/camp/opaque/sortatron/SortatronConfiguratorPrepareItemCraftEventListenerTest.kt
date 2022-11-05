@@ -33,11 +33,11 @@ class SortatronConfiguratorPrepareItemCraftEventListenerTest : StringSpec({
 
     """onPrepareItemCraft() should modify Ender Chest result to be Sortatron Configurator""" {
         every { recipe.key } returns CustomMaterial.SORTATRON_CONFIGURATOR.recipeKey
-        justRun { configuratorGenerator.markItemStack(result) }
+        justRun { configuratorGenerator.markItemStack(any(), result) }
 
         listener.onPrepareItemCraft(event)
 
-        verify { configuratorGenerator.markItemStack(result) }
+        verify { configuratorGenerator.markItemStack(CustomMaterial.SORTATRON_CONFIGURATOR, result) }
     }
 
     """onPrepareItemCraft() should not touch other results""" {

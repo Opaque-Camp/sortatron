@@ -8,5 +8,5 @@ import org.bukkit.inventory.ItemStack
  * for example, a Sortatron Accessor from an Ender Chest.
  */
 interface CustomItemStackMarker {
-    fun markItemStack(stack: ItemStack)
+    fun markItemStack(material: CustomMaterial, stack: ItemStack)
 }

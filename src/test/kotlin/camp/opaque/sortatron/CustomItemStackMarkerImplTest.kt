@@ -27,7 +27,7 @@ class CustomItemStackMarkerImplTest : StringSpec({
         }
         justRun { fakeItemMeta.displayName(Component.text("Sortatron Configurator")) }
 
-        CustomItemStackMarkerImpl(CustomMaterial.SORTATRON_CONFIGURATOR).markItemStack(itemStack)
+        CustomItemStackMarkerImpl().markItemStack(CustomMaterial.SORTATRON_CONFIGURATOR, itemStack)
 
         verify {
             fakePersistentDataContainer[namespacedKey("is_sortatron_configurator"), PersistentDataType.BYTE] = 1
@@ -41,7 +41,7 @@ class CustomItemStackMarkerImplTest : StringSpec({
         every { itemStack.type } returns Material.DIRT
 
         shouldThrow<IllegalArgumentException> {
-            CustomItemStackMarkerImpl(CustomMaterial.SORTATRON_CONFIGURATOR).markItemStack(itemStack)
+            CustomItemStackMarkerImpl().markItemStack(CustomMaterial.SORTATRON_CONFIGURATOR, itemStack)
         }
     }
 })

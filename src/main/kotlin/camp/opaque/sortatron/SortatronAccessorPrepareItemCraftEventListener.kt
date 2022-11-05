@@ -7,7 +7,7 @@ import org.bukkit.inventory.ShapedRecipe
 
 /**
  * Listens for the crafting of a Sortatron Accessor and modifies the result ItemStack to have properties of
- * the Sortatron Accessor using [SortatronAccessorItemStackGenerator].
+ * the Sortatron Accessor using [CustomItemStackMarker].
  */
 class SortatronAccessorPrepareItemCraftEventListener(
     private val sortatronAccessorItemStackGenerator: CustomItemStackMarker
@@ -16,7 +16,10 @@ class SortatronAccessorPrepareItemCraftEventListener(
     fun onPrepareItemCraft(event: PrepareItemCraftEvent) {
         val recipeKey = (event.recipe as? ShapedRecipe)?.key ?: return
         if (recipeKey.key == CustomMaterial.SORTATRON_ACCESSOR.name.lowercase()) {
-            sortatronAccessorItemStackGenerator.markItemStack(event.inventory.result ?: return)
+            sortatronAccessorItemStackGenerator.markItemStack(
+                CustomMaterial.SORTATRON_ACCESSOR,
+                event.inventory.result ?: return
+            )
         }
     }
 }

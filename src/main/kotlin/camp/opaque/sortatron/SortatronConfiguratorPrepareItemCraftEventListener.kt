@@ -16,7 +16,9 @@ class SortatronConfiguratorPrepareItemCraftEventListener(
     fun onPrepareItemCraft(event: PrepareItemCraftEvent) {
         val recipeKey = (event.recipe as? ShapedRecipe)?.key ?: return
         if (recipeKey.key == CustomMaterial.SORTATRON_CONFIGURATOR.name.lowercase()) {
-            sortatronConfiguratorItemStackGenerator.markItemStack(event.inventory.result ?: return)
+            sortatronConfiguratorItemStackGenerator.markItemStack(
+                CustomMaterial.SORTATRON_CONFIGURATOR, event.inventory.result ?: return
+            )
         }
     }
 }
