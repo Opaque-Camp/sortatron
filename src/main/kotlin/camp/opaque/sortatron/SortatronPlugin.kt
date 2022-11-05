@@ -10,11 +10,7 @@ class SortatronPlugin : JavaPlugin() {
         logger.info("Sortatron plugin starting up...")
         Recipes().register(server)
         server.pluginManager.registerEvents(
-            SortatronConfiguratorPrepareItemCraftEventListener(customItemStackMarker),
-            this
-        )
-        server.pluginManager.registerEvents(
-            SortatronAccessorPrepareItemCraftEventListener(customItemStackMarker),
+            PrepareCustomItemCraftEventListener(customItemStackMarker),
             this
         )
         logger.info("Sortatron plugin startup complete.")

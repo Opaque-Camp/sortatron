@@ -10,13 +10,13 @@ import org.bukkit.inventory.CraftingInventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.ShapedRecipe
 
-class SortatronConfiguratorPrepareItemCraftEventListenerTest : StringSpec({
+class PrepareCustomItemCraftEventListenerTest : StringSpec({
     lateinit var result: ItemStack
     lateinit var recipe: ShapedRecipe
     lateinit var craftingInventory: CraftingInventory
-    lateinit var configuratorGenerator: CustomItemStackMarker
+    lateinit var accessorGenerator: CustomItemStackMarker
     lateinit var event: PrepareItemCraftEvent
-    lateinit var listener: SortatronConfiguratorPrepareItemCraftEventListener
+    lateinit var listener: PrepareCustomItemCraftEventListener
 
     beforeAny {
         recipe = mockk()
@@ -26,18 +26,18 @@ class SortatronConfiguratorPrepareItemCraftEventListenerTest : StringSpec({
         event = mockk()
         every { event.recipe } returns recipe
         every { event.inventory } returns craftingInventory
-        configuratorGenerator = mockk()
+        accessorGenerator = mockk()
 
-        listener = SortatronConfiguratorPrepareItemCraftEventListener(configuratorGenerator)
+        listener = PrepareCustomItemCraftEventListener(accessorGenerator)
     }
 
-    """onPrepareItemCraft() should modify Ender Chest result to be Sortatron Configurator""" {
-        every { recipe.key } returns CustomMaterial.SORTATRON_CONFIGURATOR.recipeKey
-        justRun { configuratorGenerator.markItemStack(any(), result) }
+    """onPrepareItemCraft() should modify Ender Chest result to be Sortatron Accessor""" {
+        every { recipe.key } returns CustomMaterial.SORTATRON_ACCESSOR.recipeKey
+        justRun { accessorGenerator.markItemStack(any(), result) }
 
         listener.onPrepareItemCraft(event)
 
-        verify { configuratorGenerator.markItemStack(CustomMaterial.SORTATRON_CONFIGURATOR, result) }
+        verify { accessorGenerator.markItemStack(CustomMaterial.SORTATRON_ACCESSOR, result) }
     }
 
     """onPrepareItemCraft() should not touch other results""" {
