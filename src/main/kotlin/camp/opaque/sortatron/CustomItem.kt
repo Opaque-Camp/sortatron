@@ -24,7 +24,7 @@ enum class CustomItem(val humanName: String, val originalMaterial: Material) {
      * [PersistentDataContainer][org.bukkit.persistence.PersistentDataContainer].
      * Custom items have this key in their data container, while vanilla items of the same material do not.
      */
-    val identityKey get() = namespacedKey("is_${name.lowercase()}")
+    val customItemMarkerKey get() = namespacedKey("is_${name.lowercase()}")
 
     companion object {
         val enderChestBackedMaterials get() = values().filter { it.originalMaterial == ENDER_CHEST }

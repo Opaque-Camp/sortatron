@@ -6,11 +6,11 @@ import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.inventory.ItemStack
 
-class CustomEnderChestPlaceListener(private val identityPersistentDataCopier: IdentityPersistentDataCopier) : Listener {
+class CustomEnderChestPlaceListener(private val customItemMarkerKeyCopier: CustomItemMarkerKeyCopier) : Listener {
     @EventHandler
     fun onCustomEnderChestPlace(event: BlockPlaceEvent) {
         if (!isCustomEnderChest(event.itemInHand)) {
-            identityPersistentDataCopier.copyIdentityPersistentData(
+            customItemMarkerKeyCopier.copyIdentityPersistentData(
                 event.itemInHand.itemMeta.persistentDataContainer,
                 (event.block.state as EnderChest).persistentDataContainer
             )

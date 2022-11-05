@@ -2,6 +2,6 @@ package camp.opaque.sortatron
 
 import org.bukkit.persistence.PersistentDataContainer
 
-interface IdentityPersistentDataCopier {
+interface CustomItemMarkerKeyCopier {
     fun copyIdentityPersistentData(from: PersistentDataContainer, to: PersistentDataContainer)
 }

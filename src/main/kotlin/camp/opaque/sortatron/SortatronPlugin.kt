@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin
 class SortatronPlugin : JavaPlugin() {
     private val logger = SortatronLogger(getLogger())
     private val customItemStackMarker = CustomItemStackMarkerImpl()
-    private val identityPersistentDataCopier = IdentityPersistentDataCopierImpl()
+    private val customItemMarkerKeyCopier = CustomItemMarkerKeyCopierImpl()
 
     override fun onEnable() {
         logger.info("Sortatron plugin starting up...")
@@ -18,6 +18,6 @@ class SortatronPlugin : JavaPlugin() {
     private fun registerListeners() {
         server.pluginManager.registerEvents(PrepareCustomItemCraftEventListener(customItemStackMarker), this)
         server.pluginManager.registerEvents(ConfiguratorInventoryOpenEventListener(), this)
-        server.pluginManager.registerEvents(CustomEnderChestPlaceListener(identityPersistentDataCopier), this)
+        server.pluginManager.registerEvents(CustomEnderChestPlaceListener(customItemMarkerKeyCopier), this)
     }
 }

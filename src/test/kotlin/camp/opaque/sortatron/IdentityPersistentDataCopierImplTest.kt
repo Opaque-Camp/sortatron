@@ -26,7 +26,7 @@ class IdentityPersistentDataCopierImplTest : StringSpec({
             )
         }
 
-        IdentityPersistentDataCopierImpl().copyIdentityPersistentData(from, to)
+        CustomItemMarkerKeyCopierImpl().copyIdentityPersistentData(from, to)
 
         verify { to.set(namespacedKey("is_foo"), PersistentDataType.BYTE, 1) }
     }

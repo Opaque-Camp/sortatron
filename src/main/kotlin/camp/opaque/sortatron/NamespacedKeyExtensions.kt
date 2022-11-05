@@ -3,10 +3,8 @@ package camp.opaque.sortatron
 import org.bukkit.NamespacedKey
 
 /**
- * Whether this key is a Sortatron identity key - that is a marker key that states that the item has a certain custom
- * Sortatron item type.
- *
+ * Whether this key states that the item has a certain custom Sortatron item type.
  * @see CustomItem
  */
-val NamespacedKey.isSortatronIdentityKey: Boolean
+val NamespacedKey.isSortatronCustomItemMarkerKey: Boolean
     get() = namespace == "sortatron" && key.startsWith("is_")
