@@ -18,5 +18,5 @@ class CustomEnderChestPlaceListener(private val identityPersistentDataCopier: Id
     }
 
     private fun isCustomEnderChest(item: ItemStack) =
-        CustomMaterial.enderChestBackedMaterials.any(item::isCustomItemOfType)
+        CustomItem.enderChestBackedMaterials.any(item::isCustomItemOfType)
 }

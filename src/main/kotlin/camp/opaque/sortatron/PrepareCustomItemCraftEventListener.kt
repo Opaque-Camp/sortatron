@@ -13,7 +13,7 @@ class PrepareCustomItemCraftEventListener(private val customItemStackMarker: Cus
     @EventHandler
     fun onPrepareItemCraft(event: PrepareItemCraftEvent) {
         val recipeKey = (event.recipe as? ShapedRecipe)?.key ?: return
-        val customMaterialWithKey = CustomMaterial.values().find { it.recipeKey == recipeKey } ?: return
-        customItemStackMarker.markItemStack(customMaterialWithKey, event.inventory.result ?: return)
+        val customItemWithKey = CustomItem.values().find { it.recipeKey == recipeKey } ?: return
+        customItemStackMarker.markItemStack(customItemWithKey, event.inventory.result ?: return)
     }
 }
