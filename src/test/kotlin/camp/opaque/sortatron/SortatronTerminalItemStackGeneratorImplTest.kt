@@ -3,6 +3,7 @@ package camp.opaque.sortatron
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import net.kyori.adventure.text.Component
@@ -22,10 +23,10 @@ class SortatronTerminalItemStackGeneratorImplTest : StringSpec({
         every { fakeItemStack.itemMeta } returns fakeItemMeta
         every { fakeItemMeta.persistentDataContainer } returns fakePersistentDataContainer
         val generator = SortatronTerminalItemStackGeneratorImpl(itemStackFactory)
-        every {
+        justRun {
             fakePersistentDataContainer[namespacedKey("is_sortatron_terminal"), PersistentDataType.BYTE] = 1
-        } returns Unit
-        every { fakeItemMeta.displayName(Component.text("Sortatron Terminal")) } returns Unit
+        }
+        justRun { fakeItemMeta.displayName(Component.text("Sortatron Terminal")) }
 
         val itemStack = generator.generate()
 
